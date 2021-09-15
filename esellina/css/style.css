@@ -1,0 +1,89 @@
+body{
+    margin-top: 60px;
+    padding-top: 20px;
+}
+.w-400{
+   width: 400px;
+   margin: 10rem;
+}
+.fs-xs {
+    font-size: 1rem;
+    font-weight: lighter;
+}
+.w-15{
+    width: 10%;
+    
+}
+a{
+    text-decoration: none;
+}
+
+.w-10 {
+	width: 10%;
+}
+
+.fs-big {
+	font-size: 5rem !important;
+}
+.online {
+	width: 10px;
+	height: 10px;
+	background: green;
+	border-radius: 50%;
+}
+.w-15 {
+	width: 15%;
+}
+.fs-sm {
+	font-size: 1.4rem;
+}
+small {
+	color: #bbb;
+	font-size: 0.7rem;
+	text-align: right;
+}
+.m-2{
+    font-size:12rem;
+}
+
+.chat-box {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 50vh;
+}
+.rtext {
+	width: 65%;
+	background: #f8f9fa;
+	color: #444;
+}
+
+.ltext {
+	width: 65%;
+	background: rgb(235, 89, 4);
+	color: rgb(243, 225, 225);
+}
+/* width */
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: #3289c8;
+}
+
+textarea {
+	resize: none;
+}
+
+/*message_status*/

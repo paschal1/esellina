@@ -1,0 +1,26 @@
+.parentgrid{
+    display: grid;
+    grid-template-columns: auto auto;
+    }
+    
+    .fathergrid{
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .wrapper{
+        padding-left:5px;
+        margin-bottom: 12px;
+    }
+    nav{
+        float: inline;
+    }
+    hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible
+    }
+    .form-control{
+        height: 70pxO;
+        font-style: inherit;
+        font-family: monospace;
+    }

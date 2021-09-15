@@ -1,0 +1,39 @@
+/* .contain{
+    width: 500px;
+    font-size: 10px;
+}
+table{
+    padding: 0px;
+    padding-left: 0px;
+}
+
+table tr{
+    padding: 150px;
+    padding-left: 0px;
+}
+table td{
+    padding: 150px;
+    padding-left: 0px;
+    line-height: -10px;
+}
+ @media (min-height:700px), (max-width:640px){
+
+.container{
+    width: 500px;
+    font-size: 20px;
+}
+ }
+  @media (max-height:700px), (min-width:700px){
+.container{
+    width: 500px;
+    font-size: 20px;
+}
+     
+ } */
+#flash{
+    margin-left:20px;
+}
+
+/* .flex-wrap{
+    margin-right:12px;
+} */

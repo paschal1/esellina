@@ -1,0 +1,20 @@
+.container1{
+margin-top: 150px;
+width: 500px;
+pad: -moz-element(45);
+padding: 15px;
+align-content: center;
+text-align: center;
+}
+.wrapper1{
+ padding: 0px;
+ text-decoration: wavy;
+ font-family: 'Times New Roman', Times, serif;
+ font-style: normal;
+ text-align: center;
+
+}
+#post_txt{
+    width: 200px;
+    text-align: center;
+} 

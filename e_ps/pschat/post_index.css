@@ -1,0 +1,58 @@
+.wrapper {
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .container {
+        margin: 4% auto;
+    }
+
+    .container {
+        max-width: 200px;
+        margin: 1% auto;
+    }
+
+    #post_button {
+        font-size: 12px;
+        height: 25;
+        width: 55;
+        padding: 2;
+        background-color: purple;
+        color: #FFFFFF;
+        border-top: #29447E;
+        border-right-color: #29447E;
+        border-bottom-color: #1A356E;
+        border-left-color: #29447E;
+        font-weight: bold;
+    }
+
+    .loader {
+        position: fixed;
+        bottom: 0;
+        left: 100px;
+        width: 100%;
+    }
+
+
+    @media (max-width: 900px) {
+        .wrapper {
+            font-size: 20px;
+            padding: 10px;
+        }
+    }
+
+
+    @media (max-width: 600px) {
+        .carousel-caption {
+            display: none;
+        }
+
+        #icon {
+            max-width: 150px;
+        }
+
+        h4 {
+            font-size: 1.7em;
+        }
+
+    }

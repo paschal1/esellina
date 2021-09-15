@@ -1,0 +1,25 @@
+*********************************************
+******* FILE FORMATS, USAGE AND NOTES *******
+*********************************************
+
+	Below is abrief explanation of the exported logo files and it's usage.
+
+JPEG - 	This is the normal picture format, 
+	you can post this format any where around 
+	- Social media
+	- Profile pictures
+	- Wallpapers, etc.
+
+PNG  -	This format can be used if the logo is needed 
+	without the white background, 
+	this format is mostly used around graphic applications.
+
+SVG  -	This is a vector or close to Raw format 
+	which gives you the freedom of 
+	changing the some features like 
+	colour and adjusting to any size without losing the quality(sharpness), 
+	
+	Note: Please scale proportionally, so you won't lose the actual logo shape.
+	This format is advisible to be used on
+	- Web programs like applications and websites
+	- Graphic design softwares, etc.

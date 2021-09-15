@@ -1,0 +1,97 @@
+body{
+    margin: 100, 100;
+}
+[index*="col-"]{
+width: 100%;
+}
+
+.card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}
+.container{
+    width: 800px;
+    height: 100%;
+    text-align: center;
+    padding-left: 20px;
+    margin-left: 10%;
+    border:none;
+     display: flex;
+    flex-direction: row  row-reverse  column column-reverse;
+    flex-wrap: nowrap;
+    flex-flow: column wrap;
+    justify-content: center;
+    padding-top: 12px;
+    padding: 12px;
+}
+
+/* extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px){
+    .container{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 50, auto;
+    padding-left: 20px;
+    margin-left: 20%;
+    border:none;
+}
+}
+
+/* small devices (phones, 600px and up) */
+@media only screen and (min-width: 600px){
+
+    .container{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 50, auto;
+    padding-left: 20px;
+    margin-left: 20%;
+    border:none;
+}
+}
+
+/* medium devices (phones, 768px and up) */
+@media only screen and (min-width: 768px){
+
+    .container{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 50, auto;
+    padding-left: 20px;
+    margin-left: 20%;
+    border:none;
+   
+}
+}
+
+/* larger devices (phones, 768px and up) */
+@media only screen and (min-width: 992px){
+
+    .container{
+    width: 800px;
+    height: 100%;
+    text-align: center;
+    margin: 50, auto;
+    padding-left: 20px;
+    margin-left: 20%;
+    border:none;
+}
+}
+
+/* extra large devices (phones, 768px and up) */
+@media only screen and (min-width: 1200px){
+
+    .container{
+    width: 800px;
+    height: 100%;
+    text-align: center;
+    margin: 50, auto;
+    padding-left: 20px;
+    margin-left: 20%;
+    border:none;
+}
+}

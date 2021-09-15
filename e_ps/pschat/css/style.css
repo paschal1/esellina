@@ -1,0 +1,28 @@
+#singup_button
+		{
+			background:purple;
+			color:#FFFFFF;
+			border-top-color:white;
+			border-right-color:purple;
+			border-left-color:purple;
+			font-size:15px;
+			height:30;
+			width:75;
+			font-weight:bold;
+			box-shadow:-5px 0px 10px 1px rgb(0,0,0);
+
+		}
+		
+		#login_button
+		{
+			font-size:10px;
+			height:25;
+			width:49;
+			padding:2;
+			background-color:#5B74A8; color:#FFFFFF;
+			border-top:#29447E;
+			border-right-color:#29447E;
+			border-bottom-color:#1A356E;
+			border-left-color:#29447E;
+			font-weight:bold;
+		}
