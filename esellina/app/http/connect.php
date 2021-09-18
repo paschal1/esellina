@@ -2,12 +2,12 @@
 #server name
 $sName = "localhost";
 #username
-$uName = "root";
+$uName = "epspixhw_starite";
 #password
-$pass ="";
+$pass ="paschal@081";
 
 #database connection 
-$db_name = "esellina";
+$db_name = "epspixhw_esellina";
 #creating db connection 
 try {
     $dbconn = new PDO("mysql:host=$sName;dbname=$db_name", $uName, $pass);
