@@ -416,7 +416,7 @@ include('DATABASE/functions.php');
                                     <div class="row g-0">
                                         <div class="col-md-4">
                                             <?php if ($rows['post_pic'] != "") : ?>
-                                            <img src="uploads/<?php echo $rows['post_pic']; ?>" class="img-thumbnail"
+                                            <img src="esellina/uploads/<?php echo $rows['post_pic']; ?>" class="img-thumbnail"
                                                 width="100%" height="100%" />
 
                                             <?php else : ?>
