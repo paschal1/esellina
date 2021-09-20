@@ -39,7 +39,7 @@
                 <input class="form-control" type="password" id="password" name="password">
             </div>
 
-            <button type="submit" name="submit" class="btn btn-secondary">Submit</button>
+            <button type="submit" name="submit" class="btn btn-secondary">login</button>
 
             <a href="sign_up.php">Sign Up</a>
 

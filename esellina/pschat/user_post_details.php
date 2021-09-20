@@ -97,7 +97,7 @@ window.location = "user_cart.php";
                 <div class="section" id="carousel">
                     <div class="container">
                         <h2>Product Details</h2>
-                        <a class="btn btn-primary btn-round" href="post_index.php"><i
+                        <a class="btn btn-primary btn-round" href="index_twice.php"><i
                                 class="now-ui-icons arrows-1_minimal-left"></i> &nbsp Back to index</a>
                         <hr color="orange">
                         <div class="col-md-12">
@@ -182,7 +182,7 @@ window.location = "user_cart.php";
                                 <?php echo $res['post_time']; ?>
                             </ul>
                             <ul><b>Price: </b>
-                                <?php echo '#'.$res['price'].''; ?>
+                                <?php echo '$'.$res['price'].''; ?>
                             </ul>
                             <ul>
                                 <?php  $prod_qty=$res['qauntity'];?>
