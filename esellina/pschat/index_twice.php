@@ -115,7 +115,7 @@ $users = getUsers($user['user_id'], $dbconn);
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User Settings:</h6>
-                        <a class="collapse-item" href="pawn_step1/user_settings1.php">Profile</a>
+                        <a class="collapse-item" href="pawn_step1/profile.php">Profile</a>
                         <a class="collapse-item" href="">Dark mode</a>
                         <a class="collapse-item" href="pawn_profile.php">Delete Post</a>
                         <a class="collapse-item" href="">Others</a>
@@ -343,11 +343,11 @@ $users = getUsers($user['user_id'], $dbconn);
 
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="pawn_step1/user_settings1.php">
+                                <a class="dropdown-item" href="pawn_step1/profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="pawn_step1/user_settings1.php">
+                                <a class="dropdown-item" href="pawn_step1/settings.php">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
