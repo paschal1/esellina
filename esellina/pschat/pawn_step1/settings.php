@@ -15,7 +15,7 @@ $me = getUsers($_SESSION['id'], $dbconn);
 if(isset($_POST['submit'])){
 
     // get data from POST request and store them in var
-
+    $p0 = $_SESSION['id'];
     $p1 = $_POST['title'];
     $p2 = $_POST['jtitle'];
     $p3 = $_POST['you'];
@@ -120,9 +120,9 @@ if(empty($p1)){
     exit;
     }else{
             # insert into db
-                $sql = "INSERT INTO user_settings (title,jtitle,you,line1,line2,postcode,work,area,hour,education,country,state,exp1,exp2)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO user_settings (user_id,title,jtitle,you,line1,line2,postcode,work,area,hour,education,country,state,exp1,exp2)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $stmt = $dbconn->prepare($sql);
-                $stmt->execute([$p1,$p2,$p3,$p4,$p5,$p6,$p7,$p8,$p9,$p10,$p11,$p12,$p13,$p14]);
+                $stmt->execute([$p0,$p1,$p2,$p3,$p4,$p5,$p6,$p7,$p8,$p9,$p10,$p11,$p12,$p13,$p14]);
         
                  # success message
             $sm = "Profile Created Successfully"; 

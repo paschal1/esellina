@@ -12,6 +12,9 @@ include '../../app/http/connect.php';
 include '../../app/helpers/users.php';
 $me = getUsers($_SESSION['id'], $dbconn);
 
+include '../../app/helpers/set.php';
+$uSet = getSettings($_SESSION['id'], $dbconn);
+
 $id = $_SESSION['id'];
 ?>
 <!doctype html>
@@ -107,25 +110,16 @@ $id = $_SESSION['id'];
 </head>
 
 <body oncontextmenu='return false' class='snippet-body'>
-    <?php
-    $query = " SELECT * FROM user_settings WHERE settings_id= $id";
-    $statement = $dbconn->prepare($query);
-    $statement->execute();
-    $results = $statement->fetchAll();
-    foreach ($results as $users1) {
-        $settings_id = $users1[1];
-        
-    
-    ?>
+   
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-7">
                 <div class="card p-3 py-4">
                     <div class="text-center"> <img src="../../uploads/<?= $me['pic']; ?>" width="100" class="rounded-circle"> </div>
-                    <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white"><?php echo $users1[1];?></span>
-                        <h5 class="mt-2 mb-0"><?= $me['firstname'] . ' ' . $me['lastname']; ?></h5> <span><?php echo $users1[2];?></span>
+                    <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white"><?= $uSet['title']; ?></span>
+                        <h5 class="mt-2 mb-0"><?= $me['firstname'] . ' ' . $me['lastname']; ?></h5> <span><?= $uSet['jtitle']; ?></span>
                         <div class="px-4 mt-1">
-                            <p class="fonts"><?php echo $users1[3];?></p>
+                            <p class="fonts"><?= $uSet['you']; ?></p>
                         </div>
                         <ul class="social-list">
                             <li><i class="fa fa-facebook"></i></li>
@@ -134,7 +128,7 @@ $id = $_SESSION['id'];
                             <li><i class="fa fa-linkedin"></i></li>
                             <li><i class="fa fa-google"></i></li>
                         </ul>
-                        <?php }
+                        <?php// }
                         ?>
                         <div class="buttons"> <button class="btn btn-outline-primary px-4">Message</button> <button class="btn btn-primary px-4 ms-3">Contact</button> </div>
                     </div>
