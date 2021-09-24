@@ -195,7 +195,7 @@ body {
                                 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="../../../uploads/profile/<?= $me['pic']; ?>"><span class="font-weight-bold"><?= $me['firstname'] . ' ' . $me['lastname']; ?></span><span class="text-black-50"><?= $me['email']; ?></span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="../../uploads/<?= $me['pic']; ?>"><span class="font-weight-bold"><?= $me['firstname'] . ' ' . $me['lastname']; ?></span><span class="text-black-50"><?= $me['email']; ?></span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">

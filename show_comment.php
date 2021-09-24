@@ -37,7 +37,7 @@
                             <tr>
                                 <td> </td>
                                 <td bgcolor="#EDEFF4" style="padding-left:7;" colspan="2">
-                                    <img src="uploads/profile/<?php echo $user_pic; ?> " height="20px" width="20px"
+                                    <img src="esellina/uploads/<?php echo $user_pic; ?> " height="20px" width="20px"
                                         border-radius="50px" />
                                     <?php echo '<b>' . $user_n1 . '</b>'; ?>
                                     <?php echo '<b>' . $user_n2 . '</b>'; ?>

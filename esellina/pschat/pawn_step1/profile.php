@@ -121,7 +121,7 @@ $id = $_SESSION['id'];
         <div class="row d-flex justify-content-center">
             <div class="col-md-7">
                 <div class="card p-3 py-4">
-                    <div class="text-center"> <img src="../../../uploads/profile/<?= $me['pic']; ?>" width="100" class="rounded-circle"> </div>
+                    <div class="text-center"> <img src="../../uploads/<?= $me['pic']; ?>" width="100" class="rounded-circle"> </div>
                     <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white"><?php echo $users1[1];?></span>
                         <h5 class="mt-2 mb-0"><?= $me['firstname'] . ' ' . $me['lastname']; ?></h5> <span><?php echo $users1[2];?></span>
                         <div class="px-4 mt-1">
