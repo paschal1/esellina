@@ -402,7 +402,7 @@ include('DATABASE/functions.php');
 
                             <div class="card-body text-success">
                                 <?php if ($row['pic'] != "") : ?> <span>
-                                    <img src="uploads/profile/<?= $row['pic']; ?> "
+                                    <img src="esellina/uploads/<?= $row['pic']; ?> "
                                         class="img-profile rounded-circle" height="40px" width="40px"
                                         class="img-circle" />
                                 </span>
@@ -476,7 +476,7 @@ include('DATABASE/functions.php');
                                 <button type="button" placeholder="" style="border:none; background-color:white; "
                                     id="comment2" width=15%>
                                     <?php if ($row['pic'] != "") : ?>
-                                    <img src="uploads/profile/<?php echo $row['pic']; ?>"
+                                    <img src="esellina/uploads/<?php echo $row['pic']; ?>"
                                         class="img-profile rounded-circle" height="20px" width="20px"
                                         border-radius="50px" />
                                     <?php else : ?>

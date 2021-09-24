@@ -338,7 +338,7 @@ $users = getUsers($user['user_id'], $dbconn);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-light-600 small" style="color: cornsilk;"><?= $me['firstname'] . ' ' . $me['lastname']; ?></span>
-                                <img class="img-profile rounded-circle" src="../../uploads/profile/<?= $me['pic']; ?>">
+                                <img class="img-profile rounded-circle" src="../uploads/<?= $me['pic']; ?>">
                             </a>
 
                             <!-- Dropdown - User Information -->
@@ -411,7 +411,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                 <div class="card border-none mb-3 center" style="max-width: 30rem;">
                                     <div class="card-body text-success">
                                         <?php if ($row['pic'] != "") : ?> <span>
-                                                <img src="../../uploads/profile/<?= $row['pic']; ?> " class="img-profile rounded-circle" height="40px" width="40px" class="img-circle" />
+                                                <img src="../uploads/<?= $row['pic']; ?> " class="img-profile rounded-circle" height="40px" width="40px" class="img-circle" />
                                             </span>
                                         <?php else : ?>
                                             <img src="img/user.jpeg" height="40px" width="100%" class="img-profile rounded-circle" id="profileDisplay" onclick="triggerClick()" />
@@ -469,7 +469,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
                                         <button type="button" placeholder="" style="border:none; background-color:white; " id="comment2" width=15%>
                                             <?php if ($row['pic'] != "") : ?>
-                                                <img src="../../uploads/profile/<?php echo $row['pic']; ?>" class="img-profile rounded-circle" height="20px" width="20px" border-radius="50px" />
+                                                <img src="../uploads/<?php echo $row['pic']; ?>" class="img-profile rounded-circle" height="20px" width="20px" border-radius="50px" />
                                             <?php else : ?>
                                                 <img src="img/user.jpeg" style=" height:20; width:20; border-radius:50px;" />
                                             <?php endif; ?>

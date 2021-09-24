@@ -16,7 +16,7 @@ try {
     echo "Connection failed :". $e->getMessage();
 }
 
-#server name
+// #server name
 // $sName = "localhost";
 // #username
 // $uName = "root";
