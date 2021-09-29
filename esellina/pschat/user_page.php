@@ -18,14 +18,21 @@ include '../app/helpers/last_chat.php';
 
 $user = getUser($_SESSION['username'], $dbconn);
 $conversations = getConversation($user['user_id'], $dbconn);
-
+$id = $_SESSION['id'];
 //error_reporting(1);
 
 $me = getUsers($_SESSION['id'], $dbconn);
 
 $users = getUsers($user['user_id'], $dbconn);
 
-
+if(isset($_POST['delete_post']))
+{
+	$user_id=intval($_POST['user_id']);
+	$post_id=intval($_POST['post_id']);
+	$query = "DELETE FROM user_post WHERE post_id=$post_id AND user_id=$user_id;";
+	$statement = $dbconn->prepare($query);
+	$statement ->execute();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +87,7 @@ $users = getUsers($user['user_id'], $dbconn);
             <li class="nav-item">
                 <a class="nav-link" href="user_page.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>User Dashboard</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
@@ -385,17 +392,18 @@ $users = getUsers($user['user_id'], $dbconn);
 
                     <?php
 
-                    $query = "SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40";
+                    $query = "SELECT * FROM user_post WHERE user_id= '$id'";
                     $statement = $dbconn->prepare($query);
                     $statement->execute();
                     $result = $statement->fetchAll();
                     $count = $dbconn->query('SELECT * FROM user_post');
                     $num = $count->rowCount();
+                    if($result){
                     foreach ($result as $loop_key => $rows) {
                         $userid = $rows['user_id'];
                         $post_id = $rows['post_id'];
 
-                        $query1 = "SELECT * FROM users WHERE user_id=$userid";
+                        $query1 = "SELECT * FROM users WHERE user_id= '$id'";
                         $statement = $dbconn->prepare($query1);
                         $statement->execute();
                         $results = $statement->fetchAll();
@@ -488,6 +496,15 @@ $users = getUsers($user['user_id'], $dbconn);
                                                 <i class="bi bi-cursor"></i>
                                         </form>
 
+                                                <div>
+                                                
+                                                                    <span style="float: right;"> <a href="edit_post_details.php?post_id=<?php echo $post_id; ?>"><button type="button" class="btn btn-warning btn-xs edit" id="<?php echo $row[1]; ?>">Edit</button></a><br>
+                                                                <br>
+                                                                <a href="delete_post.php?post_id=<?php echo $post_id; ?>" class="btn btn-danger btn-xs edit" onClick="return confirm('Are you sure you want to delete?')">Delete</a>
+                                   
+                                            
+                                            </div>
+
 
 
 
@@ -495,10 +512,17 @@ $users = getUsers($user['user_id'], $dbconn);
 
                                 <?php
                                 include 'show_comment.php';
+                                
                             }
+                        
+                        }
+                    }else{
+                            echo "You are yet post product";
+                            echo "</br>";
+                            echo "Click on POST Button to post now!!";
                         }
                                 ?>
-
+                                
 
                                 <!-- // <div class="img-fluid loader"> -->
                                 <!-- image loader -->

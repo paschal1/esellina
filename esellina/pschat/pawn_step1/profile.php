@@ -128,8 +128,7 @@ $id = $_SESSION['id'];
                             <li><i class="fa fa-linkedin"></i></li>
                             <li><i class="fa fa-google"></i></li>
                         </ul>
-                        <?php// }
-                        ?>
+                        
                         <div class="buttons"> <button class="btn btn-outline-primary px-4">Message</button> <button class="btn btn-primary px-4 ms-3">Contact</button> </div>
                     </div>
                 </div>
