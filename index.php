@@ -434,7 +434,7 @@ include('DATABASE/functions.php');
                                                 <p class="card-text"><?php echo $rows[2]; ?></p>
                                                 <p class="card-text"><small
                                                         class="text-muted"><?php echo $rows[4] . ' Item in Stock'; ?></small>
-                                                    <span>&#8358;<?php echo $rows[3];?>
+                                                    <span>$<?php echo $rows[3];?>
 
 
                                                         <form method="post">

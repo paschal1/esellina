@@ -176,7 +176,7 @@ include('config/dbconn.php');
                                         <h6><a class="btn btn-success btn-round" title="Click for more details!"
                                                 href="pages/product_details.php?prod_id=<?php echo $res['prod_id'];?>"><i
                                                     class="now-ui-icons gestures_tap-01"></i>View</a>
-                                            <mepdium class="pull-right"> # <?php echo $res['prod_price']; ?></medium>
+                                            <mepdium class="pull-right"> $ <?php echo $res['prod_price']; ?></medium>
                                         </h6>
                                     </div>
 
