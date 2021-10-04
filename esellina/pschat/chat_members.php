@@ -3,15 +3,15 @@ session_start();
 if (isset($_SESSION['username'])) {
      
 
-include 'app/http/connect.php';
+include '../app/http/connect.php';
 
-include 'app/helpers/user.php';
-include 'app/helpers/conversations.php';
-include 'app/helpers/timeAgo.php';
-include 'app/helpers/last_chat.php';
+include '../app/helpers/user.php';
+include '../app/helpers/members.php';
+include '../app/helpers/timeAgo.php';
+include '../app/helpers/last_chat.php';
 
 $user = getUser($_SESSION['username'], $dbconn);
-$conversations = getConversation($user['user_id'], $dbconn);
+//$conversations = getMembers($user['user_id'], $dbconn);
 
 
 
@@ -46,7 +46,7 @@ $conversations = getConversation($user['user_id'], $dbconn);
 
                         </div>
                     </div>
-                <img src="uploads/<?= $user['pic'] ?>" alt="profile-image" class="w-15 rounded-circle">
+                <img src="../uploads/<?= $user['pic'] ?>" alt="profile-image" class="w-15 rounded-circle">
                 <p style="font-size:20px;" class="fs-xs m-2"><?= $user['firstname'] . ' ' . $user['lastname']; ?></p>
 
 
@@ -64,50 +64,59 @@ $conversations = getConversation($user['user_id'], $dbconn);
     			<?php
                 
                 
-                if (!empty($conversations)) { ?>
+               // if (!empty($conversations)) { ?>
     			    <?php 
-
-    			    foreach ($conversations as $conversation){ ?>
+                    $id = $_SESSION['id'];
+    $query = " SELECT * FROM users WHERE user_id != '$id'";
+    $query = $dbconn->prepare($query);
+        $query->execute();
+            $users = $query->fetchAll();
+            foreach($users as $conversations){
+    			    //foreach ($conversations as $conversation){ ?>
                     
+              
 	    			<li class="list-group-item">
-	    				<a href="chat.php?user=<?=$conversation['username']?>"
+	    				<a href="../chat.php?user=<?=$conversations['username']?>"
 	    				   class="d-flex
 	    				          justify-content-between
 	    				          align-items-center p-2">
 	    					<div class="d-flex
 	    					            align-items-center">
-	    					    <img src="uploads/<?=$conversation['pic']?>"
+	    					    <img src="../uploads/<?=$conversations['pic']?>"
 	    					         class="w-10 rounded-circle">
 	    					    <h3 class="fs-xs m-2">
-	    					    	<?=$conversation['firstname']?><br>
+	    					    	<span><?=$conversations['firstname']?></span><?php echo ' '?><?=$conversations['lastname']?><br>
                       <small>
                         <?php 
-                          echo lastChat($_SESSION['id'], $conversation['id'], $dbconn);
+                         // echo lastChat($_SESSION['id'], $conversations['user_id'], $dbconn);
                         ?>
                       </small>
 	    					    </h3>            	
 	    					</div>
-	    					<?php if (last_seen($conversation['last_seen']) == "Active") { ?>
+	    					<?php if (last_seen($conversations['last_seen']) == "Active") { ?>
 		    					<div title="online">
 		    						<div class="online"></div>
 		    					</div>
-	    					<?php } ?>
+	    					<?php } }?>
 	    				</a>
 	    			</li>
     			    <?php } ?>
-    			<?php }else{ ?>
-    				<div class="alert alert-info 
+    			<?php //}else{ ?>
+    				<!-- <div class="alert alert-info 
     				            text-center">
 					   <i class="fa fa-comments d-block fs-big"></i>
                        No messages yet, Start the conversation
-					</div>
-    			<?php } ?>
+					</div> -->
+    			
     		</ul>
     	</div>
     </div>
 	  
            
     </div>
+
+    	
+        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
@@ -157,8 +166,9 @@ $conversations = getConversation($user['user_id'], $dbconn);
 
 </html>
 <?php
-  }else{
-       header('location:index.php');
-        exit();
-    }
+  // }
+//else{
+//        header('location:index.php');
+//         exit();
+//     }
 ?>

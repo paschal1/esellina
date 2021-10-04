@@ -7,12 +7,12 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     exit();
 }
 #database connect 
-include '../../app/http/connect.php';
+include '../app/http/connect.php';
 #include users function
-include '../../app/helpers/users.php';
+include '../app/helpers/users.php';
 $me = getUsers($_SESSION['id'], $dbconn);
 
-include '../../app/helpers/set.php';
+include '../app/helpers/set.php';
 $uSet = getSettings($_SESSION['id'], $dbconn);
 
 $id = $_SESSION['id'];
