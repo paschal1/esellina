@@ -1,5 +1,5 @@
 <?php
-$dbconn = mysqli_connect("localhost","epspixhw_starite","paschal@081","epspixhw_esellina");
+$dbconn = mysqli_connect("localhost","eseltwgh_starite","paschal@081","eseltwgh_esellina");
 
 // Check connection
 if (mysqli_connect_errno())

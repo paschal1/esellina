@@ -10,6 +10,7 @@
     .container {
         max-width: 200px;
         margin: 1% auto;
+        color:rgb(73, 243, 30);
     }
 
     #post_button {

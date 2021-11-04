@@ -88,9 +88,9 @@
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="form_phone">Contact</label>
+                                            <label for="form_phone">Job Title/Name</label>
                                             <input id="form_phone" type="tel" name="contact" class="form-control"
-                                                placeholder="Please enter your Contact Info">
+                                                placeholder="Title e.g Foreign Cloth Delears">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>

@@ -5,7 +5,7 @@
 // $password = '';
 
 $host = 'localhost';
-$dbname = 'epspixhw_esellina';
-$username = 'epspixhw_starite';
+$dbname = 'eseltwgh_esellina';
+$username = 'eseltwgh_starite';
 $password = 'paschal@081';
 ?>

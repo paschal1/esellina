@@ -144,7 +144,7 @@ $users = getUsers($user['user_id'], $dbconn);
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="../chat.php">Chats</a>
-                        <a class="collapse-item" href="chat_members.php">Members</a>
+                        <a class="collapse-item" href="partners.php">Members</a>
                     </div>
                 </div>
             </li>
