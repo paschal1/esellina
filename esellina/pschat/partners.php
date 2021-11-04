@@ -60,8 +60,8 @@ $user = getUser($_SESSION['username'], $dbconn);
                        </a>
                       <div class="candidate-list-option">
                         <ul class="list-unstyled">
-                          <li><i class="fas fa-filter pr-1"></i><?=$conversations['contact']?></li>
-                          <li><i class="fas fa-map-marker-alt pr-1"></i><?=$conversations['address']?></li>
+                          <li><i class="fas fa-filter pr-1"></i><?=$conversations['address']?></li>
+                          <li><i class="fas fa-map-marker-alt pr-1"><?=$conversations['contact']?></i></li>
                         </ul>
                       </div>
                     </div>
