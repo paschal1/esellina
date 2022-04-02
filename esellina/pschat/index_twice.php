@@ -6,6 +6,20 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     header('location:../login.php');
     exit();
 }
+error_reporting(1);
+
+//error_reporting(1);
+ require_once('../../geoplugin.class/geoplugin.class.php');
+
+$geoplugin = new geoPlugin();
+
+//locate the IP
+$geoplugin->locate();
+
+//load function 
+$loadFun = "";
+$loadFun = "onload='getLocation()'";
+include('http://www.geoplugin.net/php.gp?ip='.$ip);
 //db connection goes here -->
 include('database_connect.php');
 //include functions here.. 
@@ -19,7 +33,7 @@ include '../app/helpers/last_chat.php';
 $user = getUser($_SESSION['username'], $dbconn);
 $conversations = getConversation($user['user_id'], $dbconn);
 
-//error_reporting(1);
+
 
 $me = getUsers($_SESSION['id'], $dbconn);
 
@@ -54,10 +68,42 @@ $users = getUsers($user['user_id'], $dbconn);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+        function error(err){
+            alert(err).message;
+        }
+        function success(pos){
+            //alert(`${pos.coords.latitude}`, `${pos.coords.longitude}`);
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            // console.log(lat);
+            // console.log(lon);
+            jQuery.ajax({
+                url:'setLatLong.php',
+                data:'lat='+lat+'$lon='+lon,
+                type:'post',
+                success:function(result){
+                    window.location.href="location.html"
+                }
+            });
+        }
+        //var x = document.getElementById('demo');
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success,console.error());
+            } else {
+                x.innerHTML = "Geolocation is not supported by your browser";
+            }
+        }
 
+        // function showPosition(position) {
+        //     console.log(position);
+        //     x.innerHTML = "latitude:" + position.coords.latitude + "<br>longitude: " + position.coords.longitude;
+        // }
+    </script>
 </head>
 
-<body id="page-top">
+<body id="page-top" <?php echo $loadFun;?>>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -385,9 +431,15 @@ $users = getUsers($user['user_id'], $dbconn);
 
                     <?php
 
-                    $query = "SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40";
-                    $statement = $dbconn->prepare($query);
-                    $statement->execute();
+                        if (isset($_SESSION['lat']) && isset($_SESSION['lon'])) {
+                            $query = ("SELECT post_id, user_id,  post_txt, price, qauntity, post_pic, 3959 * acos(cos (radians(lat)) * cos (radians(latitude)) * cos(radians(longitude) - radians(lon)) + sin (radians(lat)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE priority ='public' HAVING distance < 10 ORDER BY distance LIMIT 40");
+                        }else{
+                              $query = ("SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40"); 
+                              $loadFun = "onload='getLocation()'";
+                            }
+                    
+                      $statement = $dbconn->prepare($query);
+                    $statement->execute();  
                     $result = $statement->fetchAll();
                     $count = $dbconn->query('SELECT * FROM user_post');
                     $num = $count->rowCount();
@@ -437,7 +489,11 @@ $users = getUsers($user['user_id'], $dbconn);
                                                         </p>
                                                         <p class="card-text"><?php echo $rows[2]; ?></p>
                                                         <p class="card-text"><small class="text-muted"><?php echo $rows[4] . ' Item in Stock'; ?></small>
-                                                            <span>$<?php echo $rows[3]; ?>
+                                                            <span><?php 
+                                            if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($rows[3]) ." </p>\n";
+                                                            } ?>
 
 
                                                                 <form method="post">

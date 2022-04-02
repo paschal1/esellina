@@ -1,5 +1,15 @@
 <?php
 include('config/dbconn.php');
+
+//error_reporting(1);
+ require_once('../geoplugin.class/geoplugin.class.php');
+
+$geoplugin = new geoPlugin();
+
+//locate the IP
+$geoplugin->locate();
+
+include('http://www.geoplugin.net/php.gp?ip='.$ip);
 ?>
 
 <!DOCTYPE html>
@@ -176,7 +186,10 @@ include('config/dbconn.php');
                                         <h6><a class="btn btn-success btn-round" title="Click for more details!"
                                                 href="pages/product_details.php?prod_id=<?php echo $res['prod_id'];?>"><i
                                                     class="now-ui-icons gestures_tap-01"></i>View</a>
-                                            <medium class="pull-right"> # <?php echo $res['prod_price']; ?></medium>
+                                            <medium class="pull-right"> <?php if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($res['prod_price']) ." </p>\n";
+                                                            } ?></medium>
                                         </h6>
                                     </div>
 

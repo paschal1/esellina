@@ -8,7 +8,17 @@ include('DATABASE/database_connect.php');
 include('DATABASE/functions.php');
 
 //error_reporting(1);
- 
+ require_once('geoplugin.class/geoplugin.class.php');
+
+$geoplugin = new geoPlugin();
+
+//load function 
+$loadFun = "";
+$loadFun = "onload='getLocation()'";
+//locate the IP
+$geoplugin->locate();
+
+include('http://www.geoplugin.net/php.gp?ip='.$ip);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,10 +42,42 @@ include('DATABASE/functions.php');
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="img/EPS logo B&W copyPNG.png">
+<script>
+        function error(err){
+            alert(err).message;
+        }
+        function success(pos){
+            //alert(`${pos.coords.latitude}`, `${pos.coords.longitude}`);
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            // console.log(lat);
+            // console.log(lon);
+            jQuery.ajax({
+                url:'esellina/pschat/setLatLong.php',
+                data:'lat='+lat+'$lon='+lon,
+                type:'post',
+                success:function(result){
+                    window.location.href="location.html"
+                }
+            });
+        }
+        //var x = document.getElementById('demo');
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success,console.error());
+            } else {
+                x.innerHTML = "Geolocation is not supported by your browser";
+            }
+        }
 
+        // function showPosition(position) {
+        //     console.log(position);
+        //     x.innerHTML = "latitude:" + position.coords.latitude + "<br>longitude: " + position.coords.longitude;
+        // }
+    </script>
 </head>
 
-<body id="page-top">
+<body id="page-top" <?php echo $loadFun;?>>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -48,7 +90,7 @@ include('DATABASE/functions.php');
                 <div class="sidebar-brand-icon rotate-n-15">
                     <img class="rounded-circle" src="img/EPS logo ColouredSVG.svg" alt="...user" width="80px">
                 </div>
-                <div class="sidebar-brand-text mx-3">Pawn<sup></sup></div>
+                <div class="sidebar-brand-text mx-3">Esellina<sup></sup></div>
             </a>
 
             <!-- Divider -->
@@ -372,8 +414,13 @@ include('DATABASE/functions.php');
                     <!-- Page Heading -->
 
                     <?php
-
-            $query = "SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40";
+            if (isset($_SESSION['lat']) && isset($_SESSION['lon'])) {
+                            $query = ("SELECT post_id, user_id,  post_txt, price, qauntity, post_pic, 3959 * acos(cos (radians(lat)) * cos (radians(latitude)) * cos(radians(longitude) - radians(lon)) + sin (radians(lat)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE priority ='public' HAVING distance < 10 ORDER BY distance LIMIT 40");
+                        }else{
+                              $query = ("SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40"); 
+                              $loadFun = "onload='getLocation()'";
+                            }
+           // $query = "SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40";
             $statement = $dbconn->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -434,7 +481,12 @@ include('DATABASE/functions.php');
                                                 <p class="card-text"><?php echo $rows[2]; ?></p>
                                                 <p class="card-text"><small
                                                         class="text-muted"><?php echo $rows[4] . ' Item in Stock'; ?></small>
-                                                    <span>$<?php echo $rows[3];?>
+                                                    <span><?php
+                                                    if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($rows[3]) ." </p>\n";
+                                                            }
+                                                    ?>
 
 
                                                         <form method="post">

@@ -11,7 +11,15 @@ include('database_connect.php');
 //include functions here.. 
 include('functions.php');
 //error_reporting(1);
+//error_reporting(1);
+ require_once('../../geoplugin.class/geoplugin.class.php');
 
+$geoplugin = new geoPlugin();
+
+//locate the IP
+$geoplugin->locate();
+
+include('http://www.geoplugin.net/php.gp?ip='.$ip);
 ?>
 <!doctype html>
 <html lang="en" class="h-100">
@@ -126,6 +134,8 @@ include('functions.php');
              <label for="" class="form-group ">
              <input type="number" name="qty" placeholder="Number in stock" class="form-control"> 
              </label>
+             <input type="hidden" name="latitude" value="<?php echo $geoplugin->latitude;?>"> 
+             <input type="hidden" name="longitute" value="<?php echo  $geoplugin->longitude;?>" > 
              <label for="" class="form-group ">
                 <select name="priority" class="form-control" id="priority">
                 <option value="Public">Public </option>
