@@ -6,9 +6,8 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     header('location:../login.php');
     exit();
 }
-error_reporting(1);
-
 //error_reporting(1);
+
  require_once('../../geoplugin.class/geoplugin.class.php');
 
 $geoplugin = new geoPlugin();
