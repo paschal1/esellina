@@ -82,7 +82,7 @@ $users = getUsers($user['user_id'], $dbconn);
                 data:'lat='+lat+'$lon='+lon,
                 type:'post',
                 success:function(result){
-                    window.location.href="index_twice.php"
+                    window.location.href=""
                 }
             });
         }
