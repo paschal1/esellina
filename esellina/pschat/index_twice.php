@@ -6,7 +6,7 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     header('location:../login.php');
     exit();
 }
-//error_reporting(1);
+error_reporting(1);
 
  require_once('../../geoplugin.class/geoplugin.class.php');
 
@@ -79,10 +79,10 @@ $users = getUsers($user['user_id'], $dbconn);
             // console.log(lon);
             jQuery.ajax({
                 url:'setLatLong.php',
-                data:'lat='+lat+'$lon='+lon,
+                data:'lat='+lat+'&lon='+lon,
                 type:'post',
                 success:function(result){
-                    window.location.href=""
+                    //window.location.href=""
                 }
             });
         }
