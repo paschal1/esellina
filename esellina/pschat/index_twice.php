@@ -431,7 +431,7 @@ $users = getUsers($user['user_id'], $dbconn);
                     <?php
 
                         if (isset($_SESSION['lat']) && isset($_SESSION['lon'])) {
-                            $query = ("SELECT post_id, user_id,  post_txt, price, qauntity, post_pic, 3959 * acos(cos (radians(lat)) * cos (radians(latitude)) * cos(radians(longitude) - radians(lon)) + sin (radians(lat)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE priority ='public' HAVING distance < 10 ORDER BY distance LIMIT 40");
+                            $query = ("SELECT post_id, user_id,  post_txt, price, quantity, post_pic, 3959 * acos(cos (radians($lat)) * cos (radians(latitude)) * cos(radians(longitude) - radians($lon)) + sin (radians($lat)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE priority ='public' HAVING distance < 10 ORDER BY distance LIMIT 40");
                         }else{
                               $query = ("SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40"); 
                               $loadFun = "onload='getLocation()'";
