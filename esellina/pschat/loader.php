@@ -3,12 +3,12 @@ session_start();
 
     $latitude = $_SESSION['lat'];
     $longitude = $_SESSION['lon'];
-    echo $latitude;
-    echo $longitude;
-// if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
-//     header('location:../pages/user_login_page.php');
-//     exit();
-// }
+    // echo $latitude;
+    // echo $longitude;
+if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
+    header('location:../pages/user_login_page.php');
+    exit();
+}
 //db connection goes here -->
 include('database_connect.php');
 //include functions here.. 
@@ -132,7 +132,7 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
             <input type="text" name="post_txt" placeholder="Product name and more..." class="form-control"> 
              </label> 
              <label class="form-group">
-             <input type="number" name="price" placeholder="Your price" class="form-control">        
+             <input type="number" name="price" placeholder="Your Price In USD" class="form-control">        
              </label>
              <label for="" class="form-group ">
              <input type="number" name="qty" placeholder="Number in stock" class="form-control"> 
