@@ -54,10 +54,10 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
             // console.log(lon);
             jQuery.ajax({
                 url:'esellina/pschat/setLatLong.php',
-                data:'lat='+lat+'$lon='+lon,
+                data:'lat='+lat+'&lon='+lon,
                 type:'post',
                 success:function(result){
-                    window.location.href="location.html"
+                    //window.location.href="location.html"
                 }
             });
         }
