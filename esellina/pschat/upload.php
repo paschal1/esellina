@@ -90,7 +90,7 @@
 
            if(move_uploaded_file($_FILES['post_pic1']['tmp_name'], $target)){
 
-            $sql = "INSERT INTO user_post (user_id, post_txt, price, qauntity, latitude, longitude priority, post_pic) VALUES('$id', '$post_txt', '$price', '$qty', '$lat', '$lon', '$priority', '$post_imageName')";
+            $sql = "INSERT INTO user_post (user_id, post_txt, price, qauntity, latitude, longitude, priority, post_pic) VALUES('$id', '$post_txt', '$price', '$qty', '$lat', '$lon', '$priority', '$post_imageName')";
             $stmt = $dbconn->prepare($sql);
             $stmt -> execute();
 

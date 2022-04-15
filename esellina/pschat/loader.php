@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-
+    $latitute = $_SESSION['lat'];
+    $longitude = $_SESSION['lon'];
 if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     header('location:../pages/user_login_page.php');
     exit();
@@ -134,8 +135,8 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
              <label for="" class="form-group ">
              <input type="number" name="qty" placeholder="Number in stock" class="form-control"> 
              </label>
-             <input type="hidden" name="latitude" value="<?php echo $geoplugin->latitude;?>"> 
-             <input type="hidden" name="longitute" value="<?php echo  $geoplugin->longitude;?>" > 
+             <input type="hidden" name="latitude" value="<?php echo $latitude;?>"> 
+             <input type="hidden" name="longitute" value="<?php echo  $longitude;?>" > 
              <label for="" class="form-group ">
                 <select name="priority" class="form-control" id="priority">
                 <option value="Public">Public </option>
