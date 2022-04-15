@@ -79,6 +79,8 @@
 			$post_txt =$_POST['post_txt'];
             $price =$_POST['price'];
             $qty =$_POST['qty'];
+            $lat =$_POST['latitude'];
+            $lon =$_POST['longitude'];
             $priority = $_POST['priority'];
 			$post_imageName = time().'_'.$_FILES['post_pic1']['name'];
 
@@ -88,7 +90,7 @@
 
            if(move_uploaded_file($_FILES['post_pic1']['tmp_name'], $target)){
 
-            $sql = "INSERT INTO user_post (user_id, post_txt, price, qauntity, priority, post_pic) VALUES('$id', '$post_txt', '$price', '$qty', '$priority', '$post_imageName')";
+            $sql = "INSERT INTO user_post (user_id, post_txt, price, quantity, latitude, longitude, priority, post_pic) VALUES('$id', '$post_txt', '$price', '$qty', '$lat', '$lon', '$priority', '$post_imageName')";
             $stmt = $dbconn->prepare($sql);
             $stmt -> execute();
 

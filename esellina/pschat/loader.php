@@ -3,7 +3,7 @@ session_start();
 
 
 if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
-    header('location:../pages/user_login_page.php');
+    header('location:../login.php');
     exit();
 }
 //db connection goes here -->
@@ -11,7 +11,30 @@ include('database_connect.php');
 //include functions here.. 
 include('functions.php');
 //error_reporting(1);
+//error_reporting(1);
+ require_once('../../geoplugin.class/geoplugin.class.php');
 
+//$geoplugin = new geoPlugin();
+
+//locate the IP
+//$geoplugin->locate();
+
+//include('http://www.geoplugin.net/php.gp?ip='.$ip);
+
+function getVisIpAddr(){
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+        return $_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else{
+        return $_SERVER['REMOTE_ADDR'];
+    }
+}
+$ip = getVisIpAddr();
+//$ip = '52.25.109.230';
+$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
 ?>
 <!doctype html>
 <html lang="en" class="h-100">
@@ -126,6 +149,8 @@ include('functions.php');
              <label for="" class="form-group ">
              <input type="number" name="qty" placeholder="Number in stock" class="form-control"> 
              </label>
+             <input type="hidden" name="latitude" value="<?php echo $ipdat->geoplugin_latitude;//$geoplugin->latitude;?>"> 
+             <input type="hidden" name="longitude" value="<?php echo  $ipdat->geoplugin_longitude;?>" > 
              <label for="" class="form-group ">
                 <select name="priority" class="form-control" id="priority">
                 <option value="Public">Public </option>

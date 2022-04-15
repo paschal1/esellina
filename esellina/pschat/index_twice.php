@@ -6,6 +6,20 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     header('location:../login.php');
     exit();
 }
+// error_reporting(1);
+
+
+ require_once('../../geoplugin.class/geoplugin.class.php');
+
+$geoplugin = new geoPlugin();
+
+//locate the IP
+$geoplugin->locate();
+
+//load function 
+$loadFun = "";
+$loadFun = "onload='getLocation()'";
+include('http://www.geoplugin.net/php.gp?ip='.$ip);
 //db connection goes here -->
 include('database_connect.php');
 //include functions here.. 
@@ -19,7 +33,7 @@ include '../app/helpers/last_chat.php';
 $user = getUser($_SESSION['username'], $dbconn);
 $conversations = getConversation($user['user_id'], $dbconn);
 
-//error_reporting(1);
+
 
 $me = getUsers($_SESSION['id'], $dbconn);
 
@@ -54,10 +68,42 @@ $users = getUsers($user['user_id'], $dbconn);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+        function error(err){
+            alert(err.message);
+        }
+        function success(pos){
+            //alert(`${pos.coords.latitude}`, `${pos.coords.longitude}`);
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            //  console.log(lat);
+            //  console.log(lon);
+            jQuery.ajax({
+                url:'setLatLong.php',
+                data:'lat='+lat+'&lon='+lon,
+                type:'post',
+                success:function(result){
+                   //window.location.href="index_twice.php";
+                }
+            });
+        }
+        //var x = document.getElementById('demo');
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success,error);
+            } else {
+                x.innerHTML = "Geolocation is not supported by your browser";
+            }
+        }
 
+        // function showPosition(position) {
+        //     console.log(position);
+        //     x.innerHTML = "latitude:" + position.coords.latitude + "<br>longitude: " + position.coords.longitude;
+        // }
+    </script>
 </head>
 
-<body id="page-top">
+<body id="page-top" <?php echo $loadFun;?>>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -93,7 +139,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="index_twice.php" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>POST</span>
                 </a>
@@ -108,7 +154,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="index_twice.php" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Settings</span>
                 </a>
@@ -116,7 +162,7 @@ $users = getUsers($user['user_id'], $dbconn);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User Settings:</h6>
                         <a class="collapse-item" href="profile.php">Profile</a>
-                        <a class="collapse-item" href="">Dark mode</a>
+                        <a class="collapse-item" href="index_twice.php">Dark mode</a>
                         <a class="collapse-item" href="user_page.php">Delete Post</a>
                         <a class="collapse-item" href="">Others</a>
                     </div>
@@ -133,7 +179,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="index_twice.php" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
                 </a>
@@ -205,7 +251,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="index_twice.php" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
@@ -225,7 +271,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="index_twice.php" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">3+</span>
@@ -235,7 +281,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
                                             <i class="fas fa-file-alt text-white"></i>
@@ -246,7 +292,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                         <span class="font-weight-bold">A new monthly report is ready to download!</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
                                             <i class="fas fa-donate text-white"></i>
@@ -257,7 +303,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                         $290.29 has been deposited into your account!
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
                                             <i class="fas fa-exclamation-triangle text-white"></i>
@@ -274,7 +320,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="index_twice.php" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
                                 <span class="badge badge-danger badge-counter count"></span>
@@ -284,7 +330,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                 <h6 class="dropdown-header">
                                     Message Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                         <div class="status-indicator bg-success"></div>
@@ -295,7 +341,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                         <div class="small text-gray-500">Emily Fowler · 58m</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
                                         <div class="status-indicator"></div>
@@ -306,7 +352,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                         <div class="small text-gray-500">Jae Chun · 1d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
                                         <div class="status-indicator bg-warning"></div>
@@ -317,7 +363,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                         <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="index_twice.php">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
                                         <div class="status-indicator bg-success"></div>
@@ -328,7 +374,7 @@ $users = getUsers($user['user_id'], $dbconn);
                                         <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="index_twice.php">Read More Messages</a>
                             </div>
                         </li>
 
@@ -336,7 +382,7 @@ $users = getUsers($user['user_id'], $dbconn);
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="index_twice.php" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-light-600 small" style="color: cornsilk;"><?= $me['firstname'] . ' ' . $me['lastname']; ?></span>
                                 <img class="img-profile rounded-circle" src="../uploads/<?= $me['pic']; ?>">
                             </a>
@@ -385,9 +431,21 @@ $users = getUsers($user['user_id'], $dbconn);
 
                     <?php
 
-                    $query = "SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40";
-                    $statement = $dbconn->prepare($query);
-                    $statement->execute();
+                        if (isset($_SESSION['lat']) && isset($_SESSION['lon'])) {
+
+                            $lat = $_SESSION['lat'];
+                            $lon = $_SESSION['lon'];
+                            
+                            $query = ("SELECT post_id, user_id,  post_txt, price, quantity, post_pic, 3959 * acos(cos (radians($lat)) * cos (radians(latitude)) * cos(radians(longitude) - radians($lon)) + sin (radians($lat)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE priority ='public' HAVING distance < 10 ORDER BY distance LIMIT 40");
+                       
+                        }else{
+                           // $query =("SELECT post_id, user_id,  post_txt, price, quantity, post_pic, 3959 * acos(cos (radians(latitude)) * cos (radians(latitude)) * cos(radians(longitude) - radians(longitude)) + sin (radians(latitude)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE priority ='public' HAVING distance < 10 ORDER BY distance");
+                              $query = ("SELECT * FROM user_post WHERE priority ='public' ORDER BY post_id DESC LIMIT 40"); 
+                             // $loadFun = "onload='getLocation()'";
+                            }
+                    
+                      $statement = $dbconn->prepare($query);
+                    $statement->execute();  
                     $result = $statement->fetchAll();
                     $count = $dbconn->query('SELECT * FROM user_post');
                     $num = $count->rowCount();
@@ -437,7 +495,11 @@ $users = getUsers($user['user_id'], $dbconn);
                                                         </p>
                                                         <p class="card-text"><?php echo $rows[2]; ?></p>
                                                         <p class="card-text"><small class="text-muted"><?php echo $rows[4] . ' Item in Stock'; ?></small>
-                                                            <span>$<?php echo $rows[3]; ?>
+                                                            <span><?php 
+                                            if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($rows[3]) ." </p>\n";
+                                                            } ?>
 
 
                                                                 <form method="post">
