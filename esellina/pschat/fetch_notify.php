@@ -1,6 +1,6 @@
 <?php
 //connect.php;
-$dbconn = mysqli_connect("localhost", "root", "", "esellina");
+$dbconn = mysqli_connect("localhost","eseltwgh_starite","paschal@081","eseltwgh_esellina");
 if(isset($_POST['view'])){
 
 
