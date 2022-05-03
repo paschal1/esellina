@@ -32,7 +32,7 @@ class geoPlugin {
 	var $host = 'http://www.geoplugin.net/php.gp?ip={IP}&base_currency={CURRENCY}&lang={LANG}';
 		
 	//the default base currency
-	var $currency = 'USD';
+	var $currency = 'NGN';
 	
 	//the default language
 	var $lang = 'en';

@@ -64,7 +64,7 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
         //var x = document.getElementById('demo');
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success,console.error());
+                navigator.geolocation.getCurrentPosition(success,error);
             } else {
                 x.innerHTML = "Geolocation is not supported by your browser";
             }
@@ -261,7 +261,20 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter"><?php
+                                 if (isset($_SESSION['lat']) && isset($_SESSION['lon'])) {
+
+                            $lat = $_SESSION['lat'];
+                            $lon = $_SESSION['lon'];
+                            //$count = $dbconn->query("SELECT * FROM user_post WHERE status ='0' "); 
+                            $count = $dbconn->query("SELECT user_id, status, 3959 * acos(cos (radians($lat)) * cos (radians(latitude)) * cos(radians(longitude) - radians($lon)) + sin (radians($lat)) * sin(radians(latitude)) ) AS distance FROM user_post WHERE status ='0' HAVING distance < 10 ORDER BY distance");
+                            $num = $count->rowCount();
+                        }else{
+                              $count = $dbconn->query("SELECT * FROM user_post WHERE status ='0' "); 
+                              $num = $count->rowCount();
+                            }
+                            echo $num;
+                                ?></span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"

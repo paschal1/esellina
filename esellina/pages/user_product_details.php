@@ -186,7 +186,10 @@ window.location = "user_cart.php";
                                 <?php echo $res['category']; ?>
                             </ul>
                             <ul><b>Price: </b>
-                                <?php echo '#'.$res['prod_price'].''; ?>
+                                <?php  if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($res['prod_price']) ." </p>\n";
+                                                            } ?>
                             </ul>
                             <ul>
                                 <?php  $prod_qty=$res['prod_qty'];?>

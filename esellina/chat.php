@@ -16,7 +16,7 @@
   		exit;
   	}
 
-  	# Getting User data data
+  	# Getting User data 
   	 $chatWith = getUser($_GET['user'], $dbconn);
 
   	if (empty($chatWith)) {

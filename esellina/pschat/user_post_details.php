@@ -182,10 +182,14 @@ window.location = "user_cart.php";
                                 <?php echo $res['post_time']; ?>
                             </ul>
                             <ul><b>Price: </b>
-                                <?php echo '$'.$res['price'].''; ?>
+                            <?php   if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($res['price']) ." </p>\n";
+                                                            } ?>
+                                
                             </ul>
                             <ul>
-                                <?php  $prod_qty=$res['qauntity'];?>
+                                <?php  $prod_qty=$res['quantity'];?>
                                 <?php
         if ($prod_qty<=0){
         ?>
@@ -193,7 +197,7 @@ window.location = "user_cart.php";
                                 <?php
         }else{
        ?>
-                                <b>Items in stock: </b><?php echo $res['qauntity'];?>
+                                <b>Items in stock: </b><?php echo $res['quantity'];?>
                             </ul>
                             <?php 
     }

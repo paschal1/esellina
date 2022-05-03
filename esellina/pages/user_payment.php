@@ -17,7 +17,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" class="img-fluid" href="../assets/epsimage/icon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>E-Ps pawn</title>
+    <title>Esellina</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
@@ -80,7 +80,6 @@
     $query=mysqli_query($dbconn,"SELECT * FROM `users` WHERE user_id='".$_SESSION['id']."'");
     $row=mysqli_fetch_array($query);
     $firstname=$row['firstname'];
-    $middlename=$row['middlename'];
     $lastname=$row['lastname'];
     $email=$row['email'];
     $contact=$row['contact'];
@@ -115,12 +114,12 @@ $cart_table = mysqli_query($dbconn,"SELECT sum(total) FROM order_details WHERE u
            $city=$_POST['city'];
            $ship_add=$shipaddress .' '. $city;    
            echo '********* Your tracking number: '.$track_num.' | ';  
-           echo 'Total: Php'.$total.' | ';
-           echo 'Tax: Php'.$tax.' | '; 
+           echo 'Total: &#8358'.$total.' | ';
+           echo 'Tax: &#8358'.$tax.' | '; 
            echo 'Shipping Address: '.$ship_add.' *********';
 
-$query = "INSERT INTO order (user_id, track_num, firstname, middlename, lastname, email, contact, shipping_add, order_date, status, totalprice, tax) 
-        VALUES ('$user_id','$track_num','$firstname','$middlename','$lastname','$email','$contact','$ship_add','$date','Pending',,'$total','$tax')";  
+$query = "INSERT INTO order (user_id, track_num, firstname, lastname, email, contact, shipping_add, order_date, status, totalprice, tax) 
+        VALUES ('$user_id','$track_num','$firstname','$lastname','$email','$contact','$ship_add','$date','Pending',,'$total','$tax')";  
         $result = mysqli_query($dbconn,$query);
 
  mysqli_query($dbconn,"UPDATE order_details SET order_id=order_id+1 WHERE user_id='$user_id' AND order_id=''")or die(mysqli_error());
@@ -133,10 +132,10 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
 
                                     <hr color="orange">
                                     <br><br>
-                                    <h3>Payment type will be a <b>Cash On Delivery</b></h3>
+                                    <h3>Payment type will be an <b>Online instant payment</b></h3>
                                     <h3>Delivery process time, minimum of three(3) days and maximum of five(5) working
                                         days.</h3><br>
-                                    <h5>Start Technology, Inc.</h5>
+                                    <h5>Esellina, Inc.</h5>
 
                                     <button type="button" class="btn btn-warning btn-round"
                                         onclick="window.print()"><span class="now-ui-icons ui-1_check"></span>
@@ -144,6 +143,9 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                                     <a href="user_index.php"><button type="button"
                                             class="btn btn-success btn-round"><span
                                                 class="now-ui-icons ui-1_check"></span> Back to Homepage</button></a>
+                                                <a href="../../payment/initialize.php?total_price=<?php echo $total; ?>"><button type="button"
+                                            class="btn btn-success btn-round"><span
+                                                class="now-ui-icons ui-1_check"></span> Pay Now</button></a>
 
                                 </center>
 
@@ -167,7 +169,7 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                             </a>
                         </li>
                         <li>
-                            Eps pawn
+                            Esellina.com
                         </li>
                     </ul>
                 </nav>

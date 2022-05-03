@@ -61,6 +61,8 @@
                                  echo $row['firstname'];
                                 ?>'s Checking Out!
                     </h2>
+                     <a class="btn btn-default btn-round" href="index_twice.php"><i
+                            class="now-ui-icons shopping_basket"></i> &nbsp Note: Esellina.com charge you in Naira but displays the amount in your local currency in the Home page.</a>
                     <hr color="orange">
 
                     <div class="col-md-12">
@@ -80,7 +82,6 @@
     $query=mysqli_query($dbconn,"SELECT * FROM `users` WHERE user_id='".$_SESSION['id']."'");
     $row=mysqli_fetch_array($query);
     $firstname=$row['firstname'];
-    $middlename=$row['middlename'];
     $lastname=$row['lastname'];
     $email=$row['email'];
     $contact=$row['contact'];
@@ -113,21 +114,21 @@ $cart_table = mysqli_query($dbconn,"SELECT sum(total) FROM order_details WHERE u
            $track_num= $user_id.$user_id+1000;
            $shipaddress=$_POST['shipaddress'];
            $city=$_POST['city'];
-           $ship_add=$shipaddress .' '. $city;    
+           $ship_add=$shipaddress .' '. $city;                    
            echo '********* Your tracking number: '.$track_num.' | ';  
-           echo 'Total: &#8358;'.$total.' | ';
-           echo 'Tax: &#8358;'.$tax.' | '; 
+           echo 'Total: &#8358'.$total.' | ';
+           echo 'Tax: &#8358'.$tax.' | '; 
            echo 'Shipping Address: '.$ship_add.' *********';
 
-$query = "INSERT INTO order (user_id, track_num, firstname, middlename, lastname, email, contact, shipping_add, order_date, status, totalprice, tax) 
-        VALUES ('$user_id','$track_num','$firstname','$middlename','$lastname','$email','$contact','$ship_add','$date','Pending',,'$total','$tax')";  
+$query = "INSERT INTO order (user_id, track_num, firstname, lastname, email, contact, shipping_add, order_date, status, totalprice, tax) 
+        VALUES ('$user_id','$track_num','$firstname','$lastname','$email','$contact','$ship_add','$date','Pending','$total','$tax')";  
         $result = mysqli_query($dbconn,$query);
 
  mysqli_query($dbconn,"UPDATE order_details SET order_id=order_id+1 WHERE user_id='$user_id' AND order_id=''")or die(mysqli_error());
 mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHERE prod_id ='$prod_id' AND total_qty='' ");           
 
 
-}
+
 
 ?>
 
@@ -136,14 +137,17 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                                     <h3>Payment type will be a <b>Cash On Delivery</b></h3>
                                     <h3>Delivery process time, minimum of three(3) days and maximum of five(5) working
                                         days.</h3><br>
-                                    <h5>Start Technology, Inc.</h5>
+                                    <h5>Esellina, Inc.</h5>
 
                                     <button type="button" class="btn btn-warning btn-round"
                                         onclick="window.print()"><span class="now-ui-icons ui-1_check"></span>
                                         Print</button>
-                                    <a href="post_index.php"><button type="button"
+                                    <a href="index_twice.php"><button type="button"
                                             class="btn btn-success btn-round"><span
                                                 class="now-ui-icons ui-1_check"></span> Back to Homepage</button></a>
+                                                <a href="../../payment/initialize.php?total_price=<?php echo $total; ?>"><button type="button"
+                                            class="btn btn-success btn-round"><span
+                                                class="now-ui-icons ui-1_check"></span> Pay Now</button></a>
 
                                 </center>
 
@@ -156,7 +160,7 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                 </div>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br><br><br><?php } ?>
         <footer class="footer" data-background-color="black">
             <div class="container">
                 <nav>
@@ -167,7 +171,7 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                             </a>
                         </li>
                         <li>
-                            paschalnwokeocha@gmail.com
+                            
                         </li>
                     </ul>
                 </nav>
@@ -175,7 +179,7 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                     &copy;
                     <script>
                     document.write(new Date().getFullYear())
-                    </script>, Designed and Coded by Serve(5) Start Technology, Inc.
+                    </script>, Designed and Coded by Serve(5) Starite Technologies, Inc.
                 </div>
             </div>
         </footer>

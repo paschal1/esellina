@@ -77,8 +77,8 @@
                                                 <th>Product</th>
                                                 <th>Description</th>
                                                 <th width="100">Quantity</th>
-                                                <th width="100">Price(#)</th>
-                                                <th width="100">Total(#)</th>
+                                                <th width="100">Price(&#8358)</th>
+                                                <th width="100">Total(&#8358)</th>
                                                 <th width="100">Option</th>
                                             </tr>
                                         </thead>
@@ -103,8 +103,14 @@
                     ?>
                                                 </td>
                                                 <td><br><?php  echo $row['prod_qty']; ?></td>
-                                                <td><br><?php  echo $row2['prod_price']; ?></td>
-                                                <td><br><?php echo $row['total'];?></td>
+                                                <td><br><?php if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($row2['prod_price']) ." </p>\n";
+                                                            }   ?></td>
+                                                <td><br><?php if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($row['total']) ." </p>\n";
+                                                            } ?></td>
                                                 <td>
                                                     <a
                                                         href="edit_order_details.php?order_id=<?php echo $row['order_details_id'];?>"><button
@@ -131,7 +137,11 @@
                       $result5 = mysqli_query($dbconn,"SELECT sum(total) FROM order_details WHERE user_id='$user_id' and order_id=''");
                       while($row5 = mysqli_fetch_array($result5))
                         { 
-                        echo '#'.$row5['sum(total)'];
+                            if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($row5['sum(total)']) ." </p>\n";
+                                                            } 
+                        
                         echo '<input type="hidden" name="total" value="'.$row5['sum(total)'].'">';
                         }
                       ?></strong>

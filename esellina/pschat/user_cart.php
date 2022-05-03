@@ -46,8 +46,10 @@
                                  echo $row['firstname'];
                                 ?>'s Shopping Cart
                     </h2>
-                    <a class="btn btn-primary btn-round" href="post_index.php"><i
+                    <a class="btn btn-primary btn-round" href="index_twice.php"><i
                             class="now-ui-icons shopping_basket"></i> &nbsp Shop more items</a>
+                            <a class="btn btn-default btn-round" href="index_twice.php"><i
+                            class="now-ui-icons shopping_basket"></i> &nbsp Note: Esellina.com charge you in dollars but displays the amount in your local currency in the Home page.</a>
                     <hr color="orange">
 
                     <div class="col-md-12">
@@ -77,8 +79,8 @@
                                                 <th>Product</th>
                                                 <th>Description</th>
                                                 <th width="100">Quantity</th>
-                                                <th width="100">Price(#)</th>
-                                                <th width="100">Total(#)</th>
+                                                <th width="100">Price(&#8358)</th>
+                                                <th width="100">Total(&#8358)</th>
                                                 <th width="100">Option</th>
                                             </tr>
                                         </thead>
@@ -106,9 +108,17 @@
                                                     <?php echo $row2['prod_desc'];
                     ?>
                                                 </td>
+                                             
                                                 <td><br><?php  echo $row['prod_qty']; ?></td>
-                                                <td><br><?php  echo $row2['prod_price']; ?></td>
-                                                <td><br><?php echo $row['total'];?></td>
+                                                <td><br><?php
+                                                             if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($row3['price']) ." </p>\n";
+                                                            }  ?></td>
+                                                <td><br><?php if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($row['total']) ." </p>\n";
+                                                            } ?></td>
                                                 <td>
                                                     <a
                                                         href="edit_order_details.php?order_id=<?php echo $row['order_details_id'];?>"><button
@@ -134,8 +144,11 @@
                                                         <?php
                       $result5 = mysqli_query($dbconn,"SELECT sum(total) FROM order_details WHERE user_id='$user_id' and order_id=''");
                       while($row5 = mysqli_fetch_array($result5))
-                        { 
-                        echo '#'.$row5['sum(total)'];
+                        { if ( $geoplugin->currency != $geoplugin->currencyCode ) {
+	                                                    //our visitor is not using the same currency as the base currency
+	                                                    echo "<p> " . $geoplugin->convert($row5['sum(total)']) ." </p>\n";
+                                                            }
+                            
                         echo '<input type="hidden" name="total" value="'.$row5['sum(total)'].'">';
                         }
                       ?></strong>
@@ -153,7 +166,7 @@
 
                                     <script type="text/javascript">
                                     alert("Shopping Cart Empty! Add an item.");
-                                    window.location = "post_index.php";
+                                    window.location = "index_twice.php";
                                     </script>
 
                                     <?php
