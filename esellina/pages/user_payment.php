@@ -112,7 +112,8 @@ $cart_table = mysqli_query($dbconn,"SELECT sum(total) FROM order_details WHERE u
            $track_num= $user_id.$user_id+1000;
            $shipaddress=$_POST['shipaddress'];
            $city=$_POST['city'];
-           $ship_add=$shipaddress .' '. $city;    
+           $ship_add=$shipaddress .' '. $city;  
+           $amount = $total + $tax;  
            echo '********* Your tracking number: '.$track_num.' | ';  
            echo 'Total: &#8358'.$total.' | ';
            echo 'Tax: &#8358'.$tax.' | '; 
@@ -138,17 +139,38 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                                     <h5>Esellina, Inc.</h5>
 
                                     <button type="button" class="btn btn-warning btn-round"
-                                        onclick="window.print()"><span class="now-ui-icons ui-1_check"></span>
+                                        onclick="window.print()"><span class="now-ui-icons ui-1_check"></span>>
                                         Print</button>
-                                    <a href="user_index.php"><button type="button"
-                                            class="btn btn-success btn-round"><span
-                                                class="now-ui-icons ui-1_check"></span> Back to Homepage</button></a>
-                                                <a href="../../payment/initialize.php?total_price=<?php echo $total; ?>"><button type="button"
-                                            class="btn btn-success btn-round"><span
-                                                class="now-ui-icons ui-1_check"></span> Pay Now</button></a>
+                                   
+                                                
 
                                 </center>
-
+<center> <form id="paymentForm">
+  <div class="form-group">
+    <!-- <label for="email">Email Address</label> -->
+    <input type="hidden" id="email-address" value="<?php echo $email;?>" required />
+  </div>
+  <div class="form-group">
+    <!-- <label for="amount">Amount</label> -->
+    <input type="hidden" id="amount" value="<?php echo $amount;?>"  required />
+  </div>
+  <div class="form-group">
+    <!-- <label for="first-name">First Name</label> -->
+    <input type="hidden" id="first-name" value="<?php echo $firstname;?>" />
+  </div>
+  <div class="form-group">
+    <!-- <label for="last-name">Last Name</label> -->
+    <input type="hidden" id="last-name" value="<?php echo $lastname;?>"  />
+  </div>
+  <div class="form-submit">
+    
+  <button type="submit" onclick="payWithPaystack()" class="btn btn-success btn-round"><span class="now-ui-icons ui-1_check"></span> Pay Now</button>
+  </div>
+  <a href="index_twice.php"><button type="button"
+                                            class="btn btn-success btn-round"><span
+                                                class="now-ui-icons ui-1_check"></span> Back to Homepage</button></a>
+</form>
+<script src="https://js.paystack.co/v1/inline.js"></script> </center>
                             </div>
 
 
