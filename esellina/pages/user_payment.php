@@ -199,7 +199,7 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
                     &copy;
                     <script>
                     document.write(new Date().getFullYear())
-                    </script>, Designed and Coded by Serve(5) Starite Technology, Inc.
+                    </script>, Designed and Coded by Serve(5) D-Starite Technology, Inc.
                 </div>
             </div>
         </footer>
@@ -232,7 +232,33 @@ function scrollToDownload() {
     }
 }
 </script>
+<script>
 
+    const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener("submit", payWithPaystack, false);
+function payWithPaystack(e) {
+  e.preventDefault();
+  let handler = PaystackPop.setup({
+    key: 'pk_test_278dd459f559b57fcd4e0353434dbafac37431f2', // Replace with your public key
+    email: document.getElementById("email-address").value,
+    amount: document.getElementById("amount").value * 100,
+    ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+    // label: "Optional string that replaces customer email"
+    onClose: function(){
+        window.location = "https://www.esellina.com/esellina/pschat/index_twice.php?transaction=cancle";
+      alert('Are you sure you want to cancle the transaction.');
+    },
+    callback: function(response){
+      let message = 'Payment complete! Reference: ' + response.reference;
+      alert(message);
+      
+  window.location = "http://www.esellina.com/payment/verify_transaction.php?reference=" + response.reference;
+
+    }
+  });
+  handler.openIframe();
+}
+</script>
 
 <!---  inserted  -->
 <!-- SlimScroll -->
