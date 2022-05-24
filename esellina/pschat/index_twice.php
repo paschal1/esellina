@@ -6,9 +6,9 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
     header('location:../login.php');
     exit();
 }
-error_reporting(1);
+// error_reporting(1);
 
- require_once('../../geoplugin.class/geoplugin.class.php');
+ require_once('../geoplugin.class/geoplugin.class.php');
 
 $geoplugin = new geoPlugin();
 
@@ -147,6 +147,7 @@ $users = getUsers($user['user_id'], $dbconn);
                         <h6 class="collapse-header">User Components:</h6>
                         <a class="collapse-item" href="loader.php">Add Post</a>
                         <a class="collapse-item active" href="index_twice.php">View Post</a>
+                        <a class="collapse-item active" href="../../epsforum/index.php">My Forum</a>
                     </div>
                 </div>
             </li>

@@ -1,5 +1,9 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['id']) ||(trim ($_SESSION['id']) == '')) {
+        header('location:../login.php');
+        exit();
+    }
 $ref = $_GET['reference'];
 if($ref == ""){
     header("location:javascript://history.go(-1)");
@@ -38,11 +42,14 @@ if($ref == ""){
     $fname = $result-> data -> customer -> first_name;
     $name = $lname .' '.$fname;
     $email = $result-> data -> customer -> email;
+    $prod_id = $result-> data -> customer -> prod_id;
+    $post_id = $result-> data -> customer -> post_id;
     date_default_timezone_get('Africa/Lagos');
     $date = date('m/d/Y h:i:s a', time());
+    $id = $_SESSION['id'];
     include('../esellina/pschat/database_connect.php');
-    $statement = $dbconn ->prepare("INSERT INTO customer_payment (status, reference, name, date_purchased, email) VALUES (?,?,?,?,?)");
-    $statement-> bind_param("sssss", $status, $reference, $name, $date, $email);
+    $statement = $dbconn ->prepare("INSERT INTO customer_payment (status, reference, name, date_purchased, email, user_id, post_id, product_id) VALUES (?,?,?,?,?,?,?,?)");
+    $statement-> bind_param("ssssssss", $status, $reference, $name, $date, $email, $id, $post_id, $prod_id);
     $statement ->execute();
     if (!$statement){
         echo "error".mysqli_error($dbconn);

@@ -15,7 +15,7 @@ include('..//config/dbconn.php');
 		$query1 = "INSERT INTO user_post_comment (user_id,post_id,comment) VALUES ('$user_id','$post_id','$txt')";
 		$result=mysqli_query($dbconn,$query1);
 		if($result){
-			header("location:index_twice.php");
+			header("location:index_twice.php?80fg=$user_id");
 		}else{
 			echo'something went wrong'; 
 		}

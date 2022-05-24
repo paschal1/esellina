@@ -3,7 +3,7 @@
     include('../config/dbconn.php');
 
     if (!isset($_SESSION['id']) ||(trim ($_SESSION['id']) == '')) {
-        header('location:user_login_page.php');
+        header('location:../login.php');
         exit();
     }
 ?>
@@ -17,7 +17,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" class="img-fluid" href="epsimage/icon.PNG">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>E-Ps pawn</title>
+    <title>E-sellina.com</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
@@ -62,7 +62,7 @@
                                 ?>'s Checking Out!
                     </h2>
                      <a class="btn btn-default btn-round" href="index_twice.php"><i
-                            class="now-ui-icons shopping_basket"></i> &nbsp Note: Esellina.com charge you in Naira but displays the amount in your local currency in the Home page.</a>
+                            class="now-ui-icons shopping_basket"></i> &nbsp Note: Esellina.com charge you in Dollar but displays the amount in your local currency in the Home page.</a>
                     <hr color="orange">
 
                     <div class="col-md-12">
@@ -91,15 +91,16 @@
 $query = mysqli_query($dbconn,"SELECT * FROM order_details WHERE user_id='$user_id' AND order_id=''") or die (mysqli_error());
 $row3 = mysqli_fetch_array($query);
 $count = mysqli_num_rows($query);
-$prod_id=$row3['prod_id'];
+$post_id=$row3['post_id'];
 $qty= $row3['prod_qty'];
 
-$query2=mysqli_query($dbconn,"SELECT * FROM products WHERE prod_id='$prod_id'") or die (mysqli_error());
+$query2=mysqli_query($dbconn,"SELECT * FROM user_post WHERE post_id='$post_id'") or die (mysqli_error());
 $row2=mysqli_fetch_array($query2);
-$prod_qty=$row2['prod_qty'];
+$prod_qty=$row2['quantity'];
+$post_id = $row2['post_id'];
 
 
- mysqli_query($dbconn,"UPDATE products SET prod_qty = prod_qty - $qty WHERE prod_id ='$prod_id' AND prod_qty='$prod_qty'");
+ mysqli_query($dbconn,"UPDATE user_post SET quantity = quantity - $qty WHERE post_id ='$post_id' AND quantity='$prod_qty'");
        
 
 $cart_table = mysqli_query($dbconn,"SELECT sum(total) FROM order_details WHERE user_id='$user_id' AND order_id=''") or die(mysqli_error());
@@ -126,7 +127,7 @@ $query = "INSERT INTO order (user_id, track_num, firstname, lastname, email, con
         $result = mysqli_query($dbconn,$query);
 
  mysqli_query($dbconn,"UPDATE order_details SET order_id=order_id+1 WHERE user_id='$user_id' AND order_id=''")or die(mysqli_error());
-mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHERE prod_id ='$prod_id' AND total_qty='' ");           
+mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHERE post_id ='$post_id' AND total_qty='' ");           
 
 
 
@@ -163,6 +164,10 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
   <div class="form-group">
     <!-- <label for="last-name">Last Name</label> -->
     <input type="hidden" id="last-name" value="<?php echo $lastname;?>"  />
+  </div>
+  <div class="form-group">
+    <!-- <label for="last-name">Last Name</label> -->
+    <input type="hidden" id="post_id" value="<?php echo $post_id;?>"  />
   </div>
   <div class="form-submit">
     
@@ -247,6 +252,7 @@ function payWithPaystack(e) {
     key: 'pk_test_278dd459f559b57fcd4e0353434dbafac37431f2', // Replace with your public key
     email: document.getElementById("email-address").value,
     amount: document.getElementById("amount").value * 100,
+   // currency: 'USD',
     ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
     // label: "Optional string that replaces customer email"
     onClose: function(){

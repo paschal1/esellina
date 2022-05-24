@@ -162,6 +162,10 @@ mysqli_query ($dbconn,"UPDATE order_details SET total_qty =$prod_qty - $qty WHER
     <!-- <label for="last-name">Last Name</label> -->
     <input type="hidden" id="last-name" value="<?php echo $lastname;?>"  />
   </div>
+  <div class="form-group">
+    <!-- <label for="last-name">Last Name</label> -->
+    <input type="hidden" id="prod_id" value="<?php echo $prod_id;?>"  />
+  </div>
   <div class="form-submit">
     
   <button type="submit" onclick="payWithPaystack()" class="btn btn-success btn-round"><span class="now-ui-icons ui-1_check"></span> Pay Now</button>
