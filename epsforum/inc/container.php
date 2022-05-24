@@ -1,13 +1,13 @@
-<link rel="icon" type="image/png" href="https://esellina.com/epsimage/icon.png">
+<link rel="icon" type="image/png" href="epsimage/icon.png">
 </head>
 <body class="">
 <nav class="navbar navbar-expand-sm bg-dark">
   <ul class="navbar-nav">
     <li class="nav-item">
-     <a href="http://esellina.com" class="navbar-brand" style="color:white;">ESELLINA.COM</a>
+     <a href="../esellina/pschat/index_twice.php" class="navbar-brand" style="color:white;">ESELLINA.COM</a>
     </li>
     <li class="nav-item">
-      <a  class="nav-link" href="http://esellina.com">My Forum</a>
+      <a  class="nav-link" href="../esellina/pschat/index_twice.php">My Forum</a>
     </li>    
   </ul>
 </nav>
