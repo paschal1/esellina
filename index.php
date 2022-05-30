@@ -520,10 +520,10 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
                                                 <form method="post" action=""
                                                     data-sendmessage-form-id="<?php echo $loop_key; ?>">
                                                     <input type="hidden" name="to_user_id" display="none"
-                                                        value="<?php echo $user_id;?>">
+                                                        value="<?php echo $userid;?>">
 
                                                     <input type="hidden" name="from_user_id" display="none"
-                                                        value="<?php echo $from_user_id;?>">
+                                                        value="">
                                                     <input type="hidden" name="chat_message" display="none"
                                                         value="Is this Available">
                                                    <a href="" class="nav-link disabled" tabindex="-1"aria-disabled="true"> <button type="submit" name="send_message" 
