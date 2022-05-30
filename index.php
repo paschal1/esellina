@@ -8,7 +8,7 @@ include('DATABASE/database_connect.php');
 include('DATABASE/functions.php');
 
 //error_reporting(1);
- require_once('geoplugin.class/geoplugin.class.php');
+ require_once('esellina/geoplugin.class/geoplugin.class.php');
 
 $geoplugin = new geoPlugin();
 
