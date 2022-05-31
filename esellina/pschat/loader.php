@@ -15,7 +15,7 @@ include('database_connect.php');
 include('functions.php');
 //error_reporting(1);
 //error_reporting(1);
- require_once('../../geoplugin.class/geoplugin.class.php');
+ require_once('../geoplugin.class/geoplugin.class.php');
 
 $geoplugin = new geoPlugin();
 
@@ -28,7 +28,7 @@ include('http://www.geoplugin.net/php.gp?ip='.$ip);
 <html lang="en" class="h-100">
 
 <head>
-    <title>Sellina Upload</title>
+    <title>eSellina Upload</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
