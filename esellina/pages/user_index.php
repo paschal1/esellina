@@ -7,7 +7,7 @@
     }
 
     //error_reporting(1);
- require_once('../../geoplugin.class/geoplugin.class.php');
+ require_once('../geoplugin.class/geoplugin.class.php');
 
 $geoplugin = new geoPlugin();
 
